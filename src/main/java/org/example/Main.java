@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("Cao");
         if (args[0].equals("local")){
             try {
                 Class.forName("LocalImplementation");
@@ -35,34 +36,41 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
+        String createFilesPath = "";
 
         while(!input.equals("exit")){
             String[] command = input.split(" ");
 
-            switch (command[0]){
-                case "init": // init OLGA C:/Users/Lav/Desktop 2048 5 exe
-                    if(command.length >= 6){
+            switch (command[0]) {
+                case "init": // init OLGA C:/Users/Lav/Desktop 2048 5 exe txt
+                    if (command.length >= 6) {
                         int size = Integer.parseInt(command[3]);
                         int maxFiles = Integer.parseInt(command[4]);
-                        storage.initialiseDirectory(command[1], command[2], size, maxFiles, command[5]);
-                    }else if (command.length >= 5){
+                        String[] extensions = new String[command.length];
+                        int i = 0;
+                        for (String st : command)
+                            extensions[i++] = st;
+                        storage.initialiseDirectory(command[1], command[2], size, maxFiles, extensions);
+                    } else if (command.length >= 5) {
                         int size = Integer.parseInt(command[3]);
                         int maxFiles = Integer.parseInt(command[4]);
                         storage.initialiseDirectory(command[1], command[2], size, maxFiles, "");
-                    }else if (command.length >= 4){
+                    } else if (command.length >= 4) {
                         int size = Integer.parseInt(command[3]);
                         storage.initialiseDirectory(command[1], command[2], size, -1, "");
-                    }else if (command.length >= 3){
+                    } else if (command.length >= 3) {
                         storage.initialiseDirectory(command[1], command[2], -1, -1, "");
-                    }else{
+                    } else {
                         System.out.println("Ne dovoljan broj argumenata");
                     }
+                    createFilesPath = command[2] + "/" + command[1];
                     break;
 
                 case "open":    // open C:/Users/Lav/Desktop//OLGA
-                    if(command.length == 2)
+                    if (command.length == 2){
                         storage.openDirectory(command[1]);
-                    else
+                        createFilesPath = command[1];
+                    }else
                         System.out.println("Not enough arguments");
                     input = sc.nextLine();
                     break;
@@ -77,12 +85,14 @@ public class Main {
                     input = sc.nextLine();
                     break;
 
-                case "createFiles":
-                    if(command.length == 2){
+                case "createFiles":         // sluzi kao precica da kreira fajlove i direktorijume da bi mogli da ih koristimo za move, rename, .itd
+                    if(command.length == 1){
+                        storage.create("A", "#/", 5);
+                        storage.create("B", "#/", 5);
                         storage.create("B", "#/A/", 5);
                         storage.create("C", "#/A/B/", 5);
-                        File file3 = new File("C:/Users/Lav/Desktop/Adasdasd/SK/A/B/1.txt");
-                        File file4 = new File("C:/Users/Lav/Desktop/Adasdasd/SK/A/B/C/2.xlsx");
+                        File file3 = new File( createFilesPath + "/A/B/1.txt");
+                        File file4 = new File(createFilesPath + "/A/B/C/2.xlsx");
                         try {
                             file3.createNewFile();
                             file4.createNewFile();
@@ -96,7 +106,7 @@ public class Main {
                     input = sc.nextLine();
                     break;
 
-                case "delete":
+                case "delete":  //  delete #/A/B
                     if(command.length == 2){
                         storage.delete(command[1]);
                     }else
@@ -104,7 +114,7 @@ public class Main {
                     input = sc.nextLine();
                     break;
 
-                case "rename":  // rename Marko C:\\Users\\Lav\\Desktop\\Adasdasd\\SK\\A
+                case "rename":  // rename Marko #/A/B
                     if(command.length == 3)
                         storage.rename(command[1], command[2]);
                     else
@@ -124,7 +134,7 @@ public class Main {
                     input = sc.nextLine();
                     break;
 
-                case "upload":
+                case "upload":  //
                     if(command.length >= 2){
                         storage.uploadFiles(command[1], command[2]);
                     }else
