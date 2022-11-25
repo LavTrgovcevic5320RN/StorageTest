@@ -1,9 +1,14 @@
 package org.example;
 
+import storage.FileMetaData;
 import storage.Storage;
 import storage.StorageManager;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
 
 public class Main {
@@ -22,6 +27,7 @@ public class Main {
                 throw new RuntimeException(e);
             }
         }
+        Collection<FileMetaData> result;
 
         String path = args[0];
         Storage storage = StorageManager.getStorage(path);
@@ -68,6 +74,25 @@ public class Main {
                         storage.create(command[1], command[2]);
                     }else
                         System.out.println("Not enough arguments");
+                    input = sc.nextLine();
+                    break;
+
+                case "createFiles":
+                    if(command.length == 2){
+                        storage.create("B", "#/A/", 5);
+                        storage.create("C", "#/A/B/", 5);
+                        File file3 = new File("C:/Users/Lav/Desktop/Adasdasd/SK/A/B/1.txt");
+                        File file4 = new File("C:/Users/Lav/Desktop/Adasdasd/SK/A/B/C/2.xlsx");
+                        try {
+                            file3.createNewFile();
+                            file4.createNewFile();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                    }else {
+                        System.out.println("Not enough arguments");
+                    }
                     input = sc.nextLine();
                     break;
 
@@ -125,10 +150,18 @@ public class Main {
 
                 case "getStorageSize":
                     System.out.println(storage.getStorageByteSize());
+                    input = sc.nextLine();
+                    break;
+
+                case "byteQuota":
+                    if(command[1].equals("set")){
+                        storage.setSizeQuota(Long.parseLong(command[2]));
+                    }else if(command[1].equals("get"))
+                        System.out.println(storage.getSizeQuota());
+                    input = sc.nextLine();
                     break;
 
                 case "":
-
                 case "help":
                     System.out.println("...");
                     printfCommands();
