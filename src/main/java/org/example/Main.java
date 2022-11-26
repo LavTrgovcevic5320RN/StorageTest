@@ -36,11 +36,11 @@ public class Main {
         System.out.println(storage.toString());
 
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+        String input = "";
 
         while(!input.equals("exit")){
+            input = sc.nextLine();
             String[] command = input.split(" ");
-
             switch (command[0]) {
                 case "init": // init OLGA C:/Users/Lav/Desktop 2048 5 exe txt
                     if (command.length >= 6) {
@@ -72,7 +72,6 @@ public class Main {
                         createFilesPath = command[1];
                     }else
                         System.out.println("Not enough arguments");
-                    input = sc.nextLine();
                     break;
 
                 case "create":
@@ -82,7 +81,6 @@ public class Main {
                         storage.create(command[1], command[2]);
                     }else
                         System.out.println("Not enough arguments");
-                    input = sc.nextLine();
                     break;
 
                 case "createFiles":         // sluzi kao precica da kreira fajlove i direktorijume da bi mogli da ih koristimo za move, rename, .itd
@@ -103,7 +101,6 @@ public class Main {
                     }else {
                         System.out.println("Not enough arguments");
                     }
-                    input = sc.nextLine();
                     break;
 
                 case "delete":  //  delete #/A/B
@@ -111,7 +108,6 @@ public class Main {
                         storage.delete(command[1]);
                     }else
                         System.out.println("Not enough arguments");
-                    input = sc.nextLine();
                     break;
 
                 case "rename":  // rename Marko #/A/B
@@ -119,7 +115,6 @@ public class Main {
                         storage.rename(command[1], command[2]);
                     else
                         System.out.println("Not enough arguments");
-                    input = sc.nextLine();
                     break;
 
                 case "move":    // move #/B #/A/1.docx
@@ -135,7 +130,6 @@ public class Main {
                         }
                     }else
                         System.out.println("Not enough arguments");
-                    input = sc.nextLine();
                     break;
 
                 case "upload":  //  upload #/B C:/Users/Lav/Desktop/D
@@ -147,7 +141,6 @@ public class Main {
                         storage.uploadFiles(command[1], command[2]);
                     }else
                         System.out.println("Not enough arguments");
-                    input = sc.nextLine();
                     break;
 
                 case "download":    // download C:/Users/Lav/Desktop/Proba #/A/B/C
@@ -155,7 +148,6 @@ public class Main {
                         storage.download(command[1], command[2]);
                     }else
                         System.out.println("Not enough arguments");
-                    input = sc.nextLine();
                     break;
 
                 case "setMaxFiles": // set-max-files path max-files
@@ -163,12 +155,10 @@ public class Main {
                         storage.setMaxFiles(command[1], Integer.parseInt(command[2]));
                     }else
                         System.out.println("Not enough arguments");
-                    input = sc.nextLine();
                     break;
 
                 case "getStorageSize":
                     System.out.println(storage.getStorageByteSize());
-                    input = sc.nextLine();
                     break;
 
                 case "byteQuota":   //  byteQuota set 3072
@@ -176,7 +166,6 @@ public class Main {
                         storage.setSizeQuota(Long.parseLong(command[2]));
                     }else if(command[1].equals("get"))
                         System.out.println(storage.getSizeQuota());
-                    input = sc.nextLine();
                     break;
 
                 case "searchFilesInDirectory":  //  searchFilesInDirectory #/A
@@ -187,7 +176,6 @@ public class Main {
                         }
                     }else
                         System.out.println("Not enough arguments");
-                    input = sc.nextLine();
                     break;
 
                 case "searchFilesInDirectoryAndBelow":  //  searchFilesInDirectoryAndBelow #/A
@@ -198,7 +186,6 @@ public class Main {
 //                        }
                     }else
                         System.out.println("Not enough arguments");
-                    input = sc.nextLine();
                     break;
 
                 case "searchExtension":  //  searchExtension xlsx
@@ -209,7 +196,6 @@ public class Main {
                         }
                     }else
                         System.out.println("Not enough arguments");
-                    input = sc.nextLine();
                     break;
 
                 case "searchSubstring":  //  searchSubstring bravar
@@ -220,7 +206,6 @@ public class Main {
                         }
                     }else
                         System.out.println("Not enough arguments");
-                    input = sc.nextLine();
                     break;
 
                 case "searchIfExist":  //  searchIfExist #/A Markobravar.docx
@@ -234,7 +219,6 @@ public class Main {
                         System.out.println("Fajl " + command[2] + " " + str);
                     }else
                         System.out.println("Not enough arguments");
-                    input = sc.nextLine();
                     break;
 
                 case "searchFile":  //  searchFile Markobravar.docx
@@ -245,7 +229,6 @@ public class Main {
 //                        }
                     }else
                         System.out.println("Not enough arguments");
-                    input = sc.nextLine();
                     break;
 
                 case "filter":  //  filter 25 11 2022 27 11 2022 modify             filter 0 10
@@ -343,7 +326,6 @@ public class Main {
                         }else
                             System.out.println("Not enough arguments");
                     }
-                    input = sc.nextLine();
                     break;
                 case "sorter":  //  sorter true
                     if(command.length == 2){
@@ -358,17 +340,14 @@ public class Main {
 
                     }else
                         System.out.println("Not enough arguments");
-                    input = sc.nextLine();
                     break;
 
                 case "help":
                     System.out.println("...");
                     printfCommands();
-                    input = sc.nextLine();
                     break;
                 default:
                     printfCommands();
-                    input = sc.nextLine();
                     break;
             }
         }
