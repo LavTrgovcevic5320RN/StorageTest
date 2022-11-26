@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -29,6 +30,7 @@ public class Main {
             }
         }
         Collection<FileMetaData> result;
+        String createFilesPath = "";
 
         String path = args[0];
         Storage storage = StorageManager.getStorage(path);
@@ -36,7 +38,6 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        String createFilesPath = "";
 
         while(!input.equals("exit")){
             String[] command = input.split(" ");
@@ -66,7 +67,7 @@ public class Main {
                     createFilesPath = command[2] + "/" + command[1];
                     break;
 
-                case "open":    // open C:/Users/Lav/Desktop//OLGA
+                case "open":    // open C:/Users/Lav/Desktop/OLGA
                     if (command.length == 2){
                         storage.openDirectory(command[1]);
                         createFilesPath = command[1];
@@ -125,7 +126,11 @@ public class Main {
                 case "move":    // move #/B #/A/1.docx
                     if(command.length >= 2){
                         try {
-                            storage.moveFiles(command[1], command[2]);
+                            String[] filesToMove = new String[command.length];
+                            int i = 0;
+                            for (String st : command)
+                                filesToMove[i++] = st;
+                            storage.moveFiles(command[1], filesToMove);
                         } catch (FileNotFoundException e) {
                             throw new RuntimeException(e);
                         }
@@ -134,15 +139,19 @@ public class Main {
                     input = sc.nextLine();
                     break;
 
-                case "upload":  //
+                case "upload":  //  upload #/B C:/Users/Lav/Desktop/D
                     if(command.length >= 2){
+                        String[] filesToUpload = new String[command.length];
+                        int i = 0;
+                        for (String st : command)
+                            filesToUpload[i++] = st;
                         storage.uploadFiles(command[1], command[2]);
                     }else
                         System.out.println("Not enough arguments");
                     input = sc.nextLine();
                     break;
 
-                case "download":    // download C:/Users/Lav/Desktop/Proba #/A
+                case "download":    // download C:/Users/Lav/Desktop/Proba #/A/B/C
                     if(command.length >= 2){
                         storage.download(command[1], command[2]);
                     }else
@@ -163,7 +172,7 @@ public class Main {
                     input = sc.nextLine();
                     break;
 
-                case "byteQuota":
+                case "byteQuota":   //  byteQuota set 3072
                     if(command[1].equals("set")){
                         storage.setSizeQuota(Long.parseLong(command[2]));
                     }else if(command[1].equals("get"))
@@ -171,7 +180,64 @@ public class Main {
                     input = sc.nextLine();
                     break;
 
-                case "":
+                case "searchFilesInDirectory":  //  searchFilesInDirectory #/A
+                    if(command.length == 2){
+                        result = storage.searchFilesInDirectory(command[1]);
+                        for(FileMetaData f : result){
+                            System.out.println(f);
+                        }
+                    }else
+                        System.out.println("Not enough arguments");
+                    input = sc.nextLine();
+                    break;
+
+                case "searchFilesInDirectoryAndBelow":  //  searchFilesInDirectoryAndBelow #/A
+                    if(command.length == 2){
+                        result = storage.searchFilesInDirectoryAndBelow(command[1]);
+//                        for(FileMetaData f : result){
+//                            System.out.println(f);
+//                        }
+                    }else
+                        System.out.println("Not enough arguments");
+                    input = sc.nextLine();
+                    break;
+
+                case "searchExtension":  //  searchExtension #/A xlsx
+                    if(command.length == 2){
+                        result = storage.searchFilesWithExtension("", command[1]);
+//                        for(FileMetaData f : result){
+//                            System.out.println(f);
+//                        }
+                    }else
+                        System.out.println("Not enough arguments");
+                    input = sc.nextLine();
+                    break;
+
+                case "searchSubstring":  //  searchSubstring bravar
+                    if(command.length == 2){
+                        result = storage.searchFilesThatContain("", command[1]);
+                        for(FileMetaData f : result){
+                            System.out.println(f);
+                        }
+                    }else
+                        System.out.println("Not enough arguments");
+                    input = sc.nextLine();
+                    break;
+
+                case "searchIfExist":  //  searchIfExist #/A Markobravar.docx
+                    if(command.length >= 2){
+                        boolean b = storage.searchIfFilesExist(command[1], command[2]);
+                        String str = "";
+                        if(b){
+                            str = "postoji";
+                        }else
+                            str = "ne postoji";
+                        System.out.println("Fajl " + command[2] + " " + str);
+                    }else
+                        System.out.println("Not enough arguments");
+                    input = sc.nextLine();
+                    break;
+
                 case "help":
                     System.out.println("...");
                     printfCommands();
