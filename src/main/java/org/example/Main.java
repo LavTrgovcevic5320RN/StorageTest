@@ -64,6 +64,7 @@ public class Main {
                         System.out.println("Ne dovoljan broj argumenata");
                     }
                     createFilesPath = command[2] + "/" + command[1];
+
                     break;
 
                 case "open":    // open C:/Users/Lav/Desktop/OLGA
@@ -234,84 +235,76 @@ public class Main {
                 case "filter":  //  filter 25 11 2022 27 11 2022 modify             filter 0 10
                     if(command.length == 8 && command[3].length()==4){
                         if(result != null){
-                            if(command[3].length()==4){
-                                Calendar calendar1 = null;
-                                Calendar calendar2 = null;
-                                if(Integer.parseInt(command[2]) == 1) {
-                                    calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.JANUARY, Integer.parseInt(command[1]));
-                                }else if(Integer.parseInt(command[2]) == 2) {
-                                    calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.FEBRUARY, Integer.parseInt(command[1]));
-                                }else if(Integer.parseInt(command[2]) == 3) {
-                                    calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.MARCH, Integer.parseInt(command[1]));
-                                }else if(Integer.parseInt(command[2]) == 4) {
-                                    calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.APRIL, Integer.parseInt(command[1]));
-                                }else if(Integer.parseInt(command[2]) == 5) {
-                                    calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.MAY, Integer.parseInt(command[1]));
-                                }else if(Integer.parseInt(command[2]) == 6) {
-                                    calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.JUNE, Integer.parseInt(command[1]));
-                                }else if(Integer.parseInt(command[2]) == 7) {
-                                    calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.JULY, Integer.parseInt(command[1]));
-                                }else if(Integer.parseInt(command[2]) == 8) {
-                                    calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.AUGUST, Integer.parseInt(command[1]));
-                                }else if(Integer.parseInt(command[2]) == 9) {
-                                    calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.SEPTEMBER, Integer.parseInt(command[1]));
-                                }else if(Integer.parseInt(command[2]) == 10) {
-                                    calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.OCTOBER, Integer.parseInt(command[1]));
-                                }else if(Integer.parseInt(command[2]) == 11) {
-                                    calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.NOVEMBER, Integer.parseInt(command[1]));
-                                }else if(Integer.parseInt(command[2]) == 12) {
-                                    calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.DECEMBER, Integer.parseInt(command[1]));
-                                }
+                            Calendar calendar1 = null;
+                            Calendar calendar2 = null;
+                            if(Integer.parseInt(command[2]) == 1) {
+                                calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.JANUARY, Integer.parseInt(command[1]));
+                            }else if(Integer.parseInt(command[2]) == 2) {
+                                calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.FEBRUARY, Integer.parseInt(command[1]));
+                            }else if(Integer.parseInt(command[2]) == 3) {
+                                calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.MARCH, Integer.parseInt(command[1]));
+                            }else if(Integer.parseInt(command[2]) == 4) {
+                                calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.APRIL, Integer.parseInt(command[1]));
+                            }else if(Integer.parseInt(command[2]) == 5) {
+                                calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.MAY, Integer.parseInt(command[1]));
+                            }else if(Integer.parseInt(command[2]) == 6) {
+                                calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.JUNE, Integer.parseInt(command[1]));
+                            }else if(Integer.parseInt(command[2]) == 7) {
+                                calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.JULY, Integer.parseInt(command[1]));
+                            }else if(Integer.parseInt(command[2]) == 8) {
+                                calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.AUGUST, Integer.parseInt(command[1]));
+                            }else if(Integer.parseInt(command[2]) == 9) {
+                                calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.SEPTEMBER, Integer.parseInt(command[1]));
+                            }else if(Integer.parseInt(command[2]) == 10) {
+                                calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.OCTOBER, Integer.parseInt(command[1]));
+                            }else if(Integer.parseInt(command[2]) == 11) {
+                                calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.NOVEMBER, Integer.parseInt(command[1]));
+                            }else if(Integer.parseInt(command[2]) == 12) {
+                                calendar1 = new GregorianCalendar(Integer.parseInt(command[3]), Calendar.DECEMBER, Integer.parseInt(command[1]));
+                            }
 
-                                if(Integer.parseInt(command[5]) == 1) {
-                                    calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.JANUARY, Integer.parseInt(command[4]));
-                                }else if(Integer.parseInt(command[2]) == 2) {
-                                    calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.FEBRUARY, Integer.parseInt(command[4]));
-                                }else if(Integer.parseInt(command[2]) == 3) {
-                                    calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.MARCH, Integer.parseInt(command[4]));
-                                }else if(Integer.parseInt(command[2]) == 4) {
-                                    calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.APRIL, Integer.parseInt(command[4]));
-                                }else if(Integer.parseInt(command[2]) == 5) {
-                                    calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.MAY, Integer.parseInt(command[4]));
-                                }else if(Integer.parseInt(command[2]) == 6) {
-                                    calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.JUNE, Integer.parseInt(command[4]));
-                                }else if(Integer.parseInt(command[2]) == 7) {
-                                    calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.JULY, Integer.parseInt(command[4]));
-                                }else if(Integer.parseInt(command[2]) == 8) {
-                                    calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.AUGUST, Integer.parseInt(command[4]));
-                                }else if(Integer.parseInt(command[2]) == 9) {
-                                    calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.SEPTEMBER, Integer.parseInt(command[4]));
-                                }else if(Integer.parseInt(command[2]) == 10) {
-                                    calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.OCTOBER, Integer.parseInt(command[4]));
-                                }else if(Integer.parseInt(command[2]) == 11) {
-                                    calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.NOVEMBER, Integer.parseInt(command[4]));
-                                }else if(Integer.parseInt(command[2]) == 12) {
-                                    calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.DECEMBER, Integer.parseInt(command[4]));
-                                }
+                            if(Integer.parseInt(command[5]) == 1) {
+                                calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.JANUARY, Integer.parseInt(command[4]));
+                            }else if(Integer.parseInt(command[2]) == 2) {
+                                calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.FEBRUARY, Integer.parseInt(command[4]));
+                            }else if(Integer.parseInt(command[2]) == 3) {
+                                calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.MARCH, Integer.parseInt(command[4]));
+                            }else if(Integer.parseInt(command[2]) == 4) {
+                                calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.APRIL, Integer.parseInt(command[4]));
+                            }else if(Integer.parseInt(command[2]) == 5) {
+                                calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.MAY, Integer.parseInt(command[4]));
+                            }else if(Integer.parseInt(command[2]) == 6) {
+                                calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.JUNE, Integer.parseInt(command[4]));
+                            }else if(Integer.parseInt(command[2]) == 7) {
+                                calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.JULY, Integer.parseInt(command[4]));
+                            }else if(Integer.parseInt(command[2]) == 8) {
+                                calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.AUGUST, Integer.parseInt(command[4]));
+                            }else if(Integer.parseInt(command[2]) == 9) {
+                                calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.SEPTEMBER, Integer.parseInt(command[4]));
+                            }else if(Integer.parseInt(command[2]) == 10) {
+                                calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.OCTOBER, Integer.parseInt(command[4]));
+                            }else if(Integer.parseInt(command[2]) == 11) {
+                                calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.NOVEMBER, Integer.parseInt(command[4]));
+                            }else if(Integer.parseInt(command[2]) == 12) {
+                                calendar2 = new GregorianCalendar(Integer.parseInt(command[6]), Calendar.DECEMBER, Integer.parseInt(command[4]));
+                            }
 
-                                assert calendar1 != null;
-                                Date date1 = calendar1.getTime();
-                                assert calendar2 != null;
-                                Date date2 = calendar2.getTime();
-                                if(command[7].equalsIgnoreCase("create")){
-                                    filter = new Filter(date1, date2, DateType.CREATE);
-                                }else if(command[7].equalsIgnoreCase("access")){
-                                    filter = new Filter(date1, date2, DateType.ACCESS);
-                                }else if(command[7].equalsIgnoreCase("modify")){
-                                    filter = new Filter(date1, date2, DateType.MODIFY);
-                                }else
-                                    filter = new Filter(date1, date2, DateType.MODIFY);
+                            assert calendar1 != null;
+                            Date date1 = calendar1.getTime();
+                            assert calendar2 != null;
+                            Date date2 = calendar2.getTime();
+                            if(command[7].equalsIgnoreCase("create")){
+                                filter = new Filter(date1, date2, DateType.CREATE);
+                            }else if(command[7].equalsIgnoreCase("access")){
+                                filter = new Filter(date1, date2, DateType.ACCESS);
+                            }else if(command[7].equalsIgnoreCase("modify")){
+                                filter = new Filter(date1, date2, DateType.MODIFY);
+                            }else
+                                filter = new Filter(date1, date2, DateType.MODIFY);
 
-                                Collection<FileMetaData> solution = filter.applyFilter(result);
-                                for(FileMetaData f : solution) {
-                                    System.out.println(f);
-                                }
-                            }else{
-                                filter = new Filter(Long.parseLong(command[1]), Long.parseLong(command[2]));
-                                Collection<FileMetaData> solution = filter.applyFilter(result);
-                                for(FileMetaData f : solution) {
-                                    System.out.println(f);
-                                }
+                            result = filter.applyFilter(result);
+                            for(FileMetaData f : result) {
+                                System.out.println(f);
                             }
 
                         }else
@@ -319,8 +312,8 @@ public class Main {
                     }else{
                         if (result != null) {
                             filter = new Filter(Long.parseLong(command[1]), Long.parseLong(command[2]));
-                            Collection<FileMetaData> solution = filter.applyFilter(result);
-                            for (FileMetaData f : solution) {
+                            result = filter.applyFilter(result);
+                            for (FileMetaData f : result) {
                                 System.out.println(f);
                             }
                         }else
